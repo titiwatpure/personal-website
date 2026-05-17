@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Badge } from "@/components/ui/Badge";
 import { GridBackground } from "@/components/effects/GridBackground";
@@ -29,9 +30,13 @@ export default function ProjectsPage() {
                 className="group cursor-pointer border border-border rounded-sm bg-dark-card hover:border-cyan-border transition-colors duration-300 overflow-hidden"
               >
                 <div className="aspect-video bg-navy relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-4xl opacity-20">&#x2699;</span>
-                  </div>
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-dark-card to-transparent" />
                   <div className="absolute top-3 right-3">
                     <span className="font-[family-name:var(--font-space-mono)] text-[10px] text-cyan bg-dark/80 px-2 py-0.5 rounded-sm">
@@ -79,9 +84,13 @@ export default function ProjectsPage() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="aspect-video bg-navy relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-6xl opacity-20">&#x2699;</span>
-                </div>
+                <Image
+                  src={selected.image}
+                  alt={selected.name}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                />
                 <button
                   onClick={() => setSelected(null)}
                   className="absolute top-4 right-4 w-8 h-8 rounded-full border border-border bg-dark/80 flex items-center justify-center text-text-dim hover:text-text hover:border-cyan-border transition-colors"

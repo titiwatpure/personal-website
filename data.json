@@ -3,17 +3,17 @@
     "name": "ไตรทศ ทองเกิด",
     "nameEn": "Tritot Thongkoed",
     "title": "Technical Problem Solver | Engineering Systems | AI Automation",
-    "role": "วิศวกรระบบ & AI Automation",
+    "role": "นายช่างระบบ & AI Automation",
     "bio": "นายช่างด้านพลังงานผู้เชี่ยวชาญด้านระบบไฟฟ้า เครื่องกล และการตรวจสอบคุณภาพ ผสานเทคโนโลยี AI เข้ากับงานวิศวกรรมเพื่อแก้ปัญหาอย่างมีประสิทธิภาพ",
     "avatar": "/images/avatar.jpg",
     "stats": {
-      "years": "5+",
-      "projects": 24,
+      "years":  "9+",
+      "projects": 18,
       "clients": 12
     }
   },
   "about": {
-    "philosophy": "เชื่อว่าทุกปัญหาทางวิศวกรรมมีทางออก หากวิเคราะห์ด้วยข้อมูลและเครื่องมือที่เหมาะสม",
+    "philosophy": "เชื่อว่าทุกปัญหาทางวิศวกรรมมีทางออก หากวิเคราะห์ด้วยข้อมูลและเครื่องมือที่เหมาะสมและลงมือทำ",
     "highlights": [
       "เชี่ยวชาญด้านระบบไฟฟ้าและเครื่องกลในอาคารและโรงงาน",
       "พัฒนาระบบ AI สำหรับตรวจสอบเอกสารและ Audit อัตโนมัติ",
@@ -221,10 +221,10 @@
     }
   ],
   "contact": {
-    "email": "your@email.com",
-    "line": "@yourline",
+    "email": "titiwatpure@gmail.com",
+    "line": "@titiwatpure",
     "facebook": "https://facebook.com/yourprofile",
-    "phone": "0xx-xxx-xxxx",
+    "phone": "097-191-2502",
     "github": "https://github.com/titiwatpure",
     "linkedin": "https://linkedin.com/in/yourprofile"
   }

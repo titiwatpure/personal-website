@@ -10,7 +10,7 @@ import { data } from "@/data/portfolio";
 
 // ข้อมูลสถิติ (ดึงจาก data.json)
 const stats = [
-  { value: 5, suffix: "+", label: "ปีประสบการณ์" },
+  { value: data.personal.stats.years, suffix: "", label: "ปีประสบการณ์" },
   { value: data.personal.stats.projects, suffix: "", label: "โปรเจกต์" },
   { value: data.personal.stats.clients, suffix: "", label: "ลูกค้า" },
 ];

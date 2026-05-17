@@ -1,0 +1,24 @@
+<svg width="800" height="450" xmlns="http://www.w3.org/2000/svg">
+  <!-- background -->
+  <rect width="800" height="450" fill="#0a1628"/>
+  
+  <!-- gradient -->
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#4A90E2;stop-opacity:0.05" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#grad)"/>
+  
+  <!-- border -->
+  <rect x="1" y="1" width="798" height="448" fill="none" stroke="#4A90E2" stroke-width="2" opacity="0.3"/>
+  
+  <!-- icon -->
+  <text x="400" y="225" font-size="120" text-anchor="middle" dominant-baseline="central" fill="#4A90E2" opacity="0.4">📊</text>
+  
+  <!-- text -->
+  <text x="400" y="350" font-size="16" text-anchor="middle" fill="#4A90E2" opacity="0.6" font-family="Arial">
+    DASHBOARD
+  </text>
+</svg>

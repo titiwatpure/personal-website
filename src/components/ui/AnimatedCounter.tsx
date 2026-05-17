@@ -32,14 +32,16 @@ export function AnimatedCounter({
     }
 
     // ถ้าเป็นตัวเลข → นับจาก 0 ถึงค่าที่กำหนด
-    let start = 0;
     const end = value;
-    const increment = end / (duration * 60); // เพิ่มทีละนิด 60 เฟรม/วินาที
-    let current = 0;
+    const frameCount = duration * 60; // จำนวน frames ทั้งหมด (60fps)
+    const increment = end / frameCount; // เพิ่มต่อ frame
+    let frameIndex = 0;
 
     const timer = setInterval(() => {
-      current += increment;
-      if (current >= end) {
+      frameIndex++;
+      const current = increment * frameIndex;
+      
+      if (frameIndex >= frameCount) {
         setDisplay(String(end));   // ถึงค่าสุดท้ายแล้ว
         clearInterval(timer);
       } else {

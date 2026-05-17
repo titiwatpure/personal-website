@@ -4,6 +4,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { data } from "@/data/portfolio"; // โหลดข้อมูลจาก data.json
 
@@ -78,7 +79,7 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* ฝั่งขวา: ไอคอน Gear (ซ่อนบนมือถือ) */}
+          {/* ฝั่งขวา: รูปโปรไฟล์ (ซ่อนบนมือถือ) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -88,13 +89,13 @@ export function HeroSection() {
             <div className="relative w-64 h-64">
               <div className="absolute inset-0 rounded-full border border-cyan-border" /> {/* วงแหวนนอก */}
               <div className="absolute inset-2 rounded-full border border-gold-border opacity-50" /> {/* วงแหวนใน */}
-              <div className="absolute inset-4 rounded-full bg-navy flex items-center justify-center">
-                <div className="text-center">
-                  <div className="text-5xl mb-2">&#x2699;</div> {/* ไอคอนเฟือง */}
-                  <span className="font-[family-name:var(--font-space-mono)] text-xs text-text-muted">
-                    ENGINEER
-                  </span>
-                </div>
+              <div className="absolute inset-4 rounded-full bg-navy overflow-hidden">
+                <Image
+                  src={data.personal.avatar}
+                  alt={data.personal.name}
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </motion.div>

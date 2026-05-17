@@ -5,6 +5,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { data } from "@/data/portfolio";
@@ -27,11 +28,15 @@ export function FeaturedProjects() {
               transition={{ delay: i * 0.1 }}
               className="group border border-border rounded-sm bg-dark-card hover:border-cyan-border transition-colors duration-300 overflow-hidden"
             >
-              {/* พื้นที่รูปภาพ (ยังไม่มีรูป → แสดงไอคอนเฟือง) */}
+              {/* พื้นที่รูปภาพ */}
               <div className="aspect-video bg-navy relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-4xl opacity-20">&#x2699;</span>
-                </div>
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-card to-transparent" />
               </div>
 
