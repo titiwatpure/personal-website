@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r /tmp/portfolio-temp/src .)",
+      "Bash(cp -r /tmp/portfolio-temp/public .)",
+      "Bash(cp /tmp/portfolio-temp/package.json .)",
+      "Bash(cp /tmp/portfolio-temp/package-lock.json .)",
+      "Bash(cp /tmp/portfolio-temp/tsconfig.json .)",
+      "Bash(rtk ls *)",
+      "Bash(npm install *)",
+      "Bash(rtk npm *)",
+      "Bash(timeout 5)",
+      "Bash(rtk read *)",
+      "Bash(rtk curl *)"
+    ]
+  }
+}
