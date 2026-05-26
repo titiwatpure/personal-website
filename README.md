@@ -717,6 +717,99 @@ npm run build
 
 ---
 
+## 14. SEO & Google Search Console
+
+### 14.1 สิ่งที่มีมาให้แล้ว
+
+เว็บไซต์นี้ตั้งค่า SEO พื้นฐานให้แล้ว:
+
+| ไฟล์ | หน้าที่ |
+|------|---------|
+| `src/app/sitemap.ts` | สร้าง sitemap.xml อัตโนมัติ (รายชื่อหน้าเว็บทั้งหมด) |
+| `src/app/robots.ts` | สร้าง robots.txt (อนุญาตให้ Google เข้าถึง) |
+| `src/app/layout.tsx` | Meta Tags + OG Tags สำหรับ SEO |
+| `src/lib/imageLoader.ts` | Custom image loader สำหรับ GitHub Pages |
+
+### 14.2 วิธีสมัคร Google Search Console (ฟรี)
+
+1. ไปที่ https://search.google.com/search-console
+2. กด **เริ่มใช้งาน** (ลงชื่อเข้าใช้ด้วย Gmail)
+3. เลือก **URL prefix** แล้วใส่: `https://titiwatpure.github.io/personal-website/`
+4. เลือกวิธียืนยัน **แท็ก HTML** (ไม่ใช่ไฟล์ HTML)
+5. คัดลอกค่า `content` จากโค้ดที่ได้ เช่น:
+   ```html
+   <meta name="google-site-verification" content="xxxxxxxxxxxx" />
+   ```
+6. เปิด `src/app/layout.tsx` แล้วแก้ค่า `google` ในส่วน `verification`:
+   ```tsx
+   verification: {
+     google: "xxxxxxxxxxxx",  // ← วางค่า content ที่คัดลอกมา
+   },
+   ```
+7. Commit + Push ขึ้น GitHub
+8. รอ GitHub Actions build เสร็จ (1-2 นาที)
+9. กลับไป Google Search Console กด **ยืนยัน**
+
+### 14.3 วิธีส่ง Sitemap ให้ Google
+
+1. ใน Google Search Console เลือก property ของคุณ
+2. ไปที่ **Sitemap** (เมนูด้านซ้าย)
+3. เพิ่ม: `sitemap.xml`
+4. กด **ส่ง**
+
+### 14.4 วิธีเพิ่มหน้าใหม่ใน Sitemap
+
+เมื่อเพิ่มหน้าเว็บใหม่ ต้องเพิ่มใน `src/app/sitemap.ts`:
+
+```typescript
+{
+  url: `${baseUrl}/หน้าใหม่`,
+  lastModified: new Date(),
+  changeFrequency: "monthly",
+  priority: 0.8,
+},
+```
+
+Google จะ index หน้าใหม่อัตโนมัติภายใน 3-7 วัน
+
+### 14.5 วิธีตรวจสอบว่า Google ค้นหาเจอไหม
+
+**วิธีที่ 1: ค้นหาใน Google**
+พิมพ์ในช่องค้นหา:
+```
+site:titiwatpure.github.io/personal-website
+```
+ถ้าเจอผลลัพธ์ = Google index แล้ว ✅
+
+**วิธีที่ 2: ดูใน Google Search Console**
+- ไปที่ **ภาพรวม** → แสดงจำนวนหน้าที่ถูก index
+- ไปที่ **ผลการค้นหา** → แสดงจำนวนคลิกและ impressions
+
+### 14.6 เคล็ดลับให้ index เร็วขึ้น
+
+- แชร์ลิงก์เว็บบน Facebook, Twitter, Line
+- ใส่ลิงก์ในโปรไฟล์ GitHub
+- อัปเดตเนื้อหาสม่ำเสมอ (Google ชอบเว็บที่มีการเคลื่อนไหว)
+- เพิ่มบทความใหม่เป็นประจำ
+
+### 14.7 Meta Tags ที่ตั้งค่าไว้
+
+ใน `src/app/layout.tsx` มีการตั้งค่า SEO ดังนี้:
+
+| Meta Tag | หน้าที่ |
+|----------|---------|
+| `title` | ชื่อเว็บที่แสดงใน Google Search |
+| `description` | คำอธิบายเว็บที่แสดงใน Google Search |
+| `keywords` | คำค้นหาที่เกี่ยวข้อง |
+| `openGraph` | Preview สำหรับแชร์บน Facebook |
+| `twitter` | Preview สำหรับแชร์บน Twitter |
+| `robots` | อนุญาตให้ Google index |
+| `verification` | ยืนยันความเป็นเจ้าของใน Google Search Console |
+
+**วิธีแก้ไข:** เปิด `src/app/layout.tsx` แล้วแก้ค่าใน `metadata` object
+
+---
+
 ## สรุปขั้นตอนการอัปเดตเว็บ
 
 ```
