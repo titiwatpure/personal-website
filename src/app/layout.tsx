@@ -80,6 +80,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    google: "bhdYEhCYfvoq8Sy1DBT4orJC8sNUlS5D_ivfGHL6YU8",
+  },
 };
 
 // Layout หลัก: ครอบทุกหน้าเว็บ
