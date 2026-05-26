@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
   output: "export",
   basePath: "/personal-website",
   images: {
-    unoptimized: true,
+    loader: "custom",
+    loaderFile: "./src/lib/imageLoader.ts",
   },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 };
