@@ -13,11 +13,12 @@
 5. [วิธีแก้ไขข้อมูลใน data.json](#5-วิธีแก้ไขข้อมูลใน-datajson)
 6. [วิธีเพิ่ม/ลดโครงการ](#6-วิธีเพิ่มลดโครงการ)
 7. [วิธีใส่รูปภาพ](#7-วิธีใส่รูปภาพ)
-8. [วิธีแก้ไขข้อความหน้าเว็บ](#8-วิธีแก้ไขข้อความหน้าเว็บ)
-9. [วิธี Build / Export](#9-วิธี-build--export)
-10. [วิธี Deploy ขึ้น GitHub Pages](#10-วิธีdeploy-ขึ้น-github-pages)
-11. [วิธี Deploy ขึ้น Vercel](#11-วิธีdeploy-ขึ้น-vercel)
-12. [แก้ปัญหาที่พบบ่อย](#12-แก้ปัญหาที่พบบ่อย)
+8. [วิธีเพิ่มบทความ (MDX)](#8-วิธีเพิ่มบทความ-mdx)
+9. [วิธีแก้ไขข้อความหน้าเว็บ](#9-วิธีแก้ไขข้อความหน้าเว็บ)
+10. [วิธี Build / Export](#10-วิธี-build--export)
+11. [วิธี Deploy ขึ้น GitHub Pages](#11-วิธีdeploy-ขึ้น-github-pages)
+12. [วิธี Deploy ขึ้น Vercel](#12-วิธีdeploy-ขึ้น-vercel)
+13. [แก้ปัญหาที่พบบ่อย](#13-แก้ปัญหาที่พบบ่อย)
 
 ---
 
@@ -108,21 +109,29 @@ npm run dev
 │       ├── project-1.jpg  ← รูปโครงการ 1
 │       └── ...
 ├── src/
+│   ├── articles/          ← ไฟล์บทความ MDX (แก้ที่นี่)
+│   │   ├── ai-document-audit.mdx
+│   │   ├── qa-engineering.mdx
+│   │   └── ...
 │   ├── app/
 │   │   ├── page.tsx       ← หน้า Home
 │   │   ├── about/page.tsx ← หน้า About
 │   │   ├── skills/page.tsx
+│   │   ├── software/page.tsx
 │   │   ├── projects/page.tsx
 │   │   ├── tools/page.tsx
-│   │   ├── articles/page.tsx
+│   │   ├── articles/
+│   │   │   ├── page.tsx   ← หน้ารวมบทความ
+│   │   │   └── [slug]/page.tsx ← หน้าอ่านบทความแต่ละเรื่อง
 │   │   └── contact/page.tsx
 │   └── components/        ← ส่วนประกอบ UI
 └── package.json
 ```
 
-**สิ่งที่ต้องแก้หลักๆ มี 2 อย่าง:**
+**สิ่งที่ต้องแก้หลักๆ มี 3 อย่าง:**
 1. `data.json` — ข้อมูลข้อความทั้งหมด
 2. `public/images/` — รูปภาพทั้งหมด
+3. `src/articles/` — เนื้อหาบทความ (MDX)
 
 ---
 
@@ -135,16 +144,16 @@ npm run dev
 ```json
 {
   "personal": {
-    "name": "ชื่อภาษาไทย",
-    "nameEn": "Name English",
-    "title": "ตำแหน่งหรือคำโปรย",
-    "role": "บทบาท",
-    "bio": "คำอธิบายตัวเองสั้นๆ",
-    "avatar": "/images/avatar.jpg",
+    "name": "ชื่อภาษาไทย",              // ← ชื่อ-นามสกุล ภาษาไทย
+    "nameEn": "Name English",            // ← ชื่อ-นามสกุล ภาษาอังกฤษ
+    "title": "ตำแหน่งหรือคำโปรย",        // ← คำโปรยแสดงบนหน้า Hero
+    "role": "บทบาท",                     // ← บทบาท เช่น "นายช่างระบบ"
+    "bio": "คำอธิบายตัวเองสั้นๆ",        // ← คำอธิบายตัวเอง 1-2 บรรทัด
+    "avatar": "/images/avatar.jpg",      // ← path รูปโปรไฟล์ (วางใน public/images/)
     "stats": {
-      "years": "5+",
-      "projects": 24,
-      "clients": 12
+      "years": "5+",                     // ← ปีประสบการณ์
+      "projects": 24,                    // ← จำนวนโครงการ
+      "clients": 12                      // ← จำนวนลูกค้า
     }
   }
 }
@@ -161,12 +170,12 @@ npm run dev
 ```json
 {
   "contact": {
-    "email": "your@email.com",
-    "line": "@yourline",
-    "facebook": "https://facebook.com/yourprofile",
-    "phone": "0xx-xxx-xxxx",
-    "github": "https://github.com/username",
-    "linkedin": "https://linkedin.com/in/username"
+    "email": "your@email.com",                        // ← อีเมล
+    "line": "@yourline",                              // ← Line ID
+    "facebook": "https://facebook.com/yourprofile",   // ← Facebook URL
+    "phone": "0xx-xxx-xxxx",                          // ← เบอร์โทร
+    "github": "https://github.com/username",           // ← GitHub URL
+    "linkedin": "https://linkedin.com/in/username"     // ← LinkedIn URL
   }
 }
 ```
@@ -178,10 +187,10 @@ npm run dev
 ```json
 {
   "skills": {
-    "electrical": {
-      "title": "Electrical Engineering",
-      "icon": "zap",
-      "items": [
+    "electrical": {                        // ← ชื่อหมวด (ใช้เป็น key ภายใน)
+      "title": "Electrical Engineering",   // ← ชื่อที่แสดงบนหน้าเว็บ
+      "icon": "zap",                       // ← ไอคอน (zap, cog, shield, brain, chart)
+      "items": [                           // ← รายการทักษะ
         "ทักษะ 1",
         "ทักษะ 2",
         "ทักษะ 3"
@@ -225,14 +234,17 @@ npm run dev
       ...
     },
     {
-      "name": "โครงการใหม่ของคุณ",
-      "desc": "คำอธิบายโครงการ",
-      "problem": "ปัญหาที่พบ",
-      "solution": "วิธีแก้ปัญหา",
-      "tools": ["Python", "React", "PostgreSQL"],
-      "tags": ["AI", "Dashboard"],
-      "image": "/images/project-new.jpg",
-      "year": "2024"
+      "name": "โครงการใหม่ของคุณ",           // ← ชื่อโครงการ
+      "desc": "คำอธิบายโครงการ",              // ← คำอธิบายสั้นๆ
+      "problem": "ปัญหาที่พบ",                  // ← ปัญหาที่พบ
+      "solution": "วิธีแก้ปัญหา",                // ← วิธีแก้ปัญหา
+      "tools": ["Python", "React", "PostgreSQL"], // ← เครื่องมือที่ใช้
+      "tags": ["AI", "Dashboard"],                 // ← หมวดหมู่
+      "images": [                                  // ← รูปภาพ 1-3 รูป
+        "/images/project-new-1.jpg",               //   ภาพแรก = ภาพหลักบน Card
+        "/images/project-new-2.jpg"                //   ภาพที่ 2+ = แสดงใน Modal
+      ],
+      "year": "2024"                               // ← ปีที่ทำ
     }
   ]
 }
@@ -248,7 +260,7 @@ npm run dev
 | `solution` | วิธีแก้ | `"พัฒนาระบบ AI ตรวจสอบอัตโนมัติ"` |
 | `tools` | เครื่องมือที่ใช้ | `["Python", "FastAPI"]` |
 | `tags` | หมวดหมู่ | `["AI", "Automation"]` |
-| `image` | รูปภาพ | `"/images/project-1.jpg"` |
+| `images` | รูปภาพ (1-3 รูป) | `["/images/project-1.jpg"]` |
 | `year` | ปีที่ทำ | `"2024"` |
 
 > **สำคัญ:** ทุกโครงการต้องมี `,` คั่นระหว่างกัน ยกเว้นโครงการสุดท้ายไม่ต้องมี
@@ -304,12 +316,12 @@ public/images/project-qa.jpg   → ใน data.json เขียน "/images/pro
 ```json
 {
   "personal": {
-    "avatar": "/images/avatar.jpg"
+    "avatar": "/images/avatar.jpg"  // ← path รูปโปรไฟล์ (เริ่มด้วย /images/)
   }
 }
 ```
 
-### 7.4 รูปโครงการ
+### 7.4 รูปโครงการ (หลายภาพต่อโครงการ)
 
 วางไฟล์รูปโครงการใน `public/images/` แล้วใน `data.json`:
 
@@ -318,11 +330,44 @@ public/images/project-qa.jpg   → ใน data.json เขียน "/images/pro
   "projects": [
     {
       "name": "Project Name",
-      "image": "/images/project-1.jpg"
+      "images": [                          // ← ใส่ 1-3 รูปต่อโครงการ
+        "/images/project-1.jpg",           //   ภาพแรก = แสดงบน Card หลัก
+        "/images/project-2.jpg",           //   ภาพที่ 2 = แสดงใน Modal
+        "/images/project-3.jpg"            //   ภาพที่ 3 = แสดงใน Modal
+      ]
     }
   ]
 }
 ```
+
+- ใส่ 1-3 รูปต่อโครงการ
+- ภาพแรกจะแสดงบนหน้า Card
+- Modal จะมี carousel ให้เลื่อนดูทุกภาพ
+
+### 7.5 รูป Software & Tools
+
+วางไฟล์รูปตัวอย่างงานออกแบบใน `public/images/` แล้วใน `data.json`:
+
+```json
+{
+  "software": [
+    {
+      "title": "CAD & Design",
+      "icon": "ruler",
+      "items": ["AutoCAD", "SketchUp"],
+      "samples": [                         // ← ใส่ 4 รูปต่อหมวด (แสดง 2x2)
+        "/images/sample-cad-1.jpg",        //   แถว 1 คอลัมน์ 1
+        "/images/sample-cad-2.jpg",        //   แถว 1 คอลัมน์ 2
+        "/images/sample-cad-3.jpg",        //   แถว 2 คอลัมน์ 1
+        "/images/sample-cad-4.jpg"         //   แถว 2 คอลัมน์ 2
+      ]
+    }
+  ]
+}
+```
+
+- ใส่ 4 รูปต่อหมวด (แสดงเป็น 2x2 grid)
+- คลิกที่รูปเพื่อดูขยาย (lightbox)
 
 ### 7.5 ขนาดรูปที่แนะนำ
 
@@ -335,7 +380,120 @@ public/images/project-qa.jpg   → ใน data.json เขียน "/images/pro
 
 ---
 
-## 8. วิธีแก้ไขข้อความหน้าเว็บ
+## 8. วิธีเพิ่มบทความ (MDX)
+
+บทความเขียนด้วย MDX (Markdown + JSX) แยกไฟล์ออกจากโค้ด
+
+### 8.1 สร้างบทความใหม่
+
+1. สร้างไฟล์ `.mdx` ในโฟลเดอร์ `src/articles/` เช่น `my-article.mdx`
+2. เขียนเนื้อหาด้วย Markdown:
+
+```mdx
+export const metadata = {
+  title: "ชื่อบทความ",           {/* ชื่อบทความ (แสดงบนหน้าเว็บ) */}
+  desc: "คำอธิบายสั้นๆ",          {/* คำอธิบาย (แสดงบนหน้ารวมบทความ) */}
+  category: "หมวดหมู่",            {/* หมวดหมู่ เช่น "AI Engineering" */}
+  date: "2024",                    {/* ปีที่เขียน */}
+};
+
+import { ArticleImage, ImageGrid } from "@/components/ui/ArticleImage";
+
+{/* ด้านบนคือส่วนข้อมูลบทความ + import component ภาพ */}
+
+# ชื่อบทความ                     {/* หัวข้อใหญ่ (h1) */}
+
+เนื้อหาบทความเขียนด้วย Markdown...
+
+## หัวข้อย่อย                     {/* หัวข้อย่อย (h2) */}
+
+- รายการ 1                        {/* รายการ bullet */}
+- รายการ 2
+
+**ตัวหนา** และ *ตัวเอียง*         {/* ตัวหนา/ตัวเอียง */}
+```
+
+> **หมายเหตุ:** ใน MDX ใช้ `{/* comment */}` สำหรับ comment (ไม่ใช่ `//`)
+
+### 8.2 เพิ่มภาพในบทความ
+
+**ภาพเดี่ยว (เต็มความกว้าง + caption):**
+```mdx
+{/* วางไว้ตรงไหนในบทความก็ได้ */}
+<Image
+  src="/images/article-photo.jpg"    {/* path รูป (อยู่ใน public/images/) */}
+  alt="คำอธิบายภาพ"                  {/* คำอธิบายภาพ (สำหรับ SEO) */}
+  caption="คำบรรยายภาพ"              {/* คำบรรยายใต้ภาพ (แสดงบนเว็บ) */}
+/>
+```
+
+**2 ภาพคู่ (ซ้าย-ขวา):**
+```mdx
+{/* ครอบด้วย ImageGrid เพื่อแสดง 2 คอลัมน์ */}
+<ImageGrid>
+  <Image
+    src="/images/before.jpg"         {/* รูปซ้าย */}
+    alt="ก่อน"
+    caption="ก่อนปรับปรุง"
+  />
+  <Image
+    src="/images/after.jpg"          {/* รูปขวา */}
+    alt="หลัง"
+    caption="หลังปรับปรุง"
+  />
+</ImageGrid>
+```
+
+- คลิกที่ภาพเพื่อดูขยาย (lightbox)
+- วางไฟล์ภาพใน `public/images/`
+
+### 8.3 ลงทะเบียนบทความ
+
+หลังสร้างไฟล์ MDX แล้ว ต้องเพิ่ม slug ใน 2 ที่:
+
+**ที่ 1:** `src/app/articles/[slug]/page.tsx` — เพิ่ม slug ใน array:
+```tsx
+const articles = [
+  "ai-document-audit",     // ← ต้องตรงกับชื่อไฟล์ .mdx
+  "qa-engineering",        // ← ต้องตรงกับชื่อไฟล์ .mdx
+  "my-new-article",        // ← เพิ่ม slug ใหม่ตรงนี้ (ต้องตรงกับชื่อไฟล์ .mdx)
+];
+```
+
+**ที่ 2:** `data.json` — เพิ่มข้อมูลใน array `articles`:
+```json
+{
+  "articles": [
+    {
+      "title": "ชื่อบทความ",      // ← ชื่อบทความ (แสดงบนหน้ารวมบทความ)
+      "desc": "คำอธิบาย",         // ← คำอธิบายสั้น
+      "category": "หมวดหมู่",      // ← หมวดหมู่ เช่น "AI Engineering"
+      "date": "2024"               // ← ปีที่เขียน
+    }
+  ]
+}
+```
+
+### 8.4 Markdown ที่รองรับ
+
+| Syntax | ผลลัพธ์ |
+|--------|--------|
+| `# หัวข้อ` | หัวข้อใหญ่ |
+| `## หัวข้อ` | หัวข้อย่อย |
+| `**ตัวหนา**` | **ตัวหนา** |
+| `*ตัวเอียง*` | *ตัวเอียง* |
+| `- รายการ` | รายการ bullet |
+| `1. รายการ` | รายการตัวเลข |
+| `` `โค้ด` `` | `โค้ด` |
+| `> อ้างอิง` | อ้างอิง |
+| `[ลิงก์](url)` | ลิงก์ |
+| `{/* comment */}` | comment (ไม่แสดงบนเว็บ) |
+
+> **หมายเหตุ:** ใน MDX ใช้ `{/* comment */}` สำหรับ comment ไม่ใช่ `//` (เพราะ `//` จะทำให้ Build Error)
+
+---
+
+## 9. วิธีแก้ไขข้อความหน้าเว็บ
 
 ### ข้อความทั้งหมดอยู่ใน `data.json`
 
@@ -346,9 +504,10 @@ public/images/project-qa.jpg   → ใน data.json เขียน "/images/pro
 | หน้า Home | `personal.name`, `personal.title`, `personal.bio` |
 | หน้า About | `about.philosophy`, `about.highlights`, `about.experience` |
 | หน้า Skills | `skills` (แต่ละหมวด) |
-| หน้า Projects | `projects` (แต่ละโครงการ) |
+| หน้า Software | `software` (แต่ละหมวด + รูปตัวอย่างงาน) |
+| หน้า Projects | `projects` (แต่ละโครงการ + หลายรูป) |
 | หน้า AI Tools | `aiTools` (แต่ละเครื่องมือ) |
-| หน้า Articles | `articles` (แต่ละบทความ) |
+| หน้า Articles | `articles` (ข้อมูล) + `src/articles/*.mdx` (เนื้อหา) |
 | หน้า Contact | `contact` (ข้อมูลติดต่อ) |
 
 ### ตัวอย่าง: เปลี่ยนคำโปรยหน้าแรก
@@ -375,7 +534,7 @@ public/images/project-qa.jpg   → ใน data.json เขียน "/images/pro
 
 ---
 
-## 9. วิธี Build / Export
+## 10. วิธี Build / Export
 
 ### Build สำหรับ Deploy
 
@@ -395,7 +554,7 @@ npx serve out
 
 ---
 
-## 10. วิธีDeploy ขึ้น GitHub Pages
+## 11. วิธีDeploy ขึ้น GitHub Pages
 
 ### ขั้นตอนที่ 1: สร้าง GitHub Repository
 
@@ -477,7 +636,7 @@ git push
 
 ---
 
-## 11. วิธีDeploy ขึ้น Vercel
+## 12. วิธีDeploy ขึ้น Vercel
 
 Vercel เป็นวิธีที่ง่ายที่สุด ฟรี และเหมาะกับ Next.js
 
@@ -501,7 +660,7 @@ Vercel จะ build และ deploy ให้อัตโนมัติ
 
 ---
 
-## 12. แก้ปัญหาที่พบบ่อย
+## 13. แก้ปัญหาที่พบบ่อย
 
 ### `npm install` ไม่สำเร็จ
 
@@ -543,16 +702,30 @@ npm run build
 2. กด **Validate JSON**
 3. แก้ไขตามที่แจ้ง
 
+### บทความไม่แสดง / Build Error บทความ
+
+1. ตรวจสอบว่า slug ใน `src/app/articles/[slug]/page.tsx` ตรงกับชื่อไฟล์ `.mdx`
+2. ตรวจสอบว่ามี `export const metadata = { ... }` ด้านบนไฟล์ MDX
+3. ตรวจสอบว่า import path ถูกต้อง: `import { ArticleImage, ImageGrid } from "@/components/ui/ArticleImage"`
+4. **ถ้ามี comment `//`** — เปลี่ยนเป็น `{/* comment */}` เพราะ MDX ไม่รองรับ `//`
+
+### ภาพในบทความไม่แสดง
+
+1. ตรวจสอบว่าไฟล์ภาพอยู่ใน `public/images/`
+2. ตรวจสอบว่า path ใน MDX ถูกต้อง: `src="/images/ชื่อไฟล์.jpg"`
+3. ตรวจสอบว่าไม่มีช่องว่างในชื่อไฟล์
+
 ---
 
 ## สรุปขั้นตอนการอัปเดตเว็บ
 
 ```
-1. แก้ data.json      → เปลี่ยนข้อความ/ข้อมูล
-2. ใส่รูปใน public/images/  → เพิ่มรูปภาพ
-3. npm run dev        → ดูตัวอย่าง
-4. npm run build      → Build สำหรับ deploy
-5. git push           → อัปขึ้น GitHub/Vercel
+1. แก้ data.json           → เปลี่ยนข้อความ/ข้อมูล
+2. ใส่รูปใน public/images/    → เพิ่มรูปภาพ
+3. แก้ src/articles/*.mdx   → เพิ่ม/แก้บทความ
+4. npm run dev             → ดูตัวอย่าง
+5. npm run build           → Build สำหรับ deploy
+6. git push                → อัปขึ้น GitHub/Vercel
 ```
 
 ---
@@ -563,4 +736,5 @@ npm run build
 - **Tailwind CSS 4** — CSS Framework
 - **Framer Motion** — Animation
 - **TypeScript** — Type-safe JavaScript
+- **MDX** — Markdown + JSX สำหรับบทความ
 - **Sarabun + Space Mono** — Fonts

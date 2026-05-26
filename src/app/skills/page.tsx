@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Badge } from "@/components/ui/Badge";
 import { GridBackground } from "@/components/effects/GridBackground";
@@ -66,6 +67,38 @@ export default function SkillsPage() {
                 </div>
               </motion.div>
             ))}
+
+            {/* Software & Tools card */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: categories.length * 0.1 }}
+              className="border border-border rounded-sm bg-dark-card p-6 hover:border-cyan-border transition-colors group"
+            >
+              <div className="flex items-center gap-3 mb-5">
+                <span className="text-2xl">&#x1F4BB;</span>
+                <h3 className="font-[family-name:var(--font-space-mono)] text-xs text-text-muted tracking-wider uppercase">
+                  Software & Tools
+                </h3>
+              </div>
+
+              <div className="flex flex-wrap gap-2 mb-4">
+                {data.software.flatMap((cat) =>
+                  cat.items.map((item) => (
+                    <Badge key={item} variant="default" className="group-hover:border-opacity-50">
+                      {item}
+                    </Badge>
+                  ))
+                )}
+              </div>
+
+              <Link
+                href="/software"
+                className="inline-flex items-center gap-1 font-[family-name:var(--font-space-mono)] text-[11px] text-cyan opacity-70 hover:opacity-100 transition-opacity tracking-wider"
+              >
+                ดูรายละเอียด + ตัวอย่างงาน &#x2192;
+              </Link>
+            </motion.div>
           </div>
         </div>
       </div>

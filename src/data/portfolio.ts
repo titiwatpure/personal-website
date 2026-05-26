@@ -50,8 +50,16 @@ export interface Project {
   solution: string;  // วิธีแก้ปัญหา
   tools: string[];   // เครื่องมือที่ใช้ เช่น ["Python", "React"]
   tags: string[];    // แท็ก เช่น ["AI", "Dashboard"]
-  image: string;     // path รูปภาพ เช่น "/images/project-1.jpg"
+  images: string[];  // path รูปภาพหลายรูป เช่น ["/images/project-1.jpg"]
   year: string;      // ปีที่ทำ
+}
+
+// === ข้อมูล Software ===
+export interface SoftwareCategory {
+  title: string;       // ชื่อหมวด เช่น "CAD & Design"
+  icon: string;        // ไอคอน
+  items: string[];     // รายการโปรแกรม
+  samples: string[];   // path รูปตัวอย่างผลงานออกแบบ
 }
 
 // === ข้อมูลเครื่องมือ AI ===
@@ -86,6 +94,7 @@ export interface PortfolioData {
   about: AboutInfo;
   skills: Record<string, SkillCategory>; // Record = object ที่มี key เป็น string
   projects: Project[];
+  software: SoftwareCategory[];
   aiTools: AITool[];
   articles: Article[];
   contact: ContactInfo;

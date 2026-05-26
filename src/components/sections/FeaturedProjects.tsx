@@ -31,7 +31,7 @@ export function FeaturedProjects() {
               {/* พื้นที่รูปภาพ */}
               <div className="aspect-video bg-navy relative overflow-hidden">
                 <Image
-                  src={project.image}
+                  src={project.images[0]}
                   alt={project.name}
                   fill
                   className="object-cover"

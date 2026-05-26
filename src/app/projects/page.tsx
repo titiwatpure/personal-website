@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -11,6 +11,33 @@ import type { Project } from "@/data/portfolio";
 
 export default function ProjectsPage() {
   const [selected, setSelected] = useState<Project | null>(null);
+  const [currentImg, setCurrentImg] = useState(0);
+
+  const openProject = useCallback((project: Project) => {
+    setSelected(project);
+    setCurrentImg(0);
+  }, []);
+
+  const nextImg = useCallback(() => {
+    if (!selected) return;
+    setCurrentImg((i) => (i + 1) % selected.images.length);
+  }, [selected]);
+
+  const prevImg = useCallback(() => {
+    if (!selected) return;
+    setCurrentImg((i) => (i - 1 + selected.images.length) % selected.images.length);
+  }, [selected]);
+
+  useEffect(() => {
+    if (!selected) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") nextImg();
+      if (e.key === "ArrowLeft") prevImg();
+      if (e.key === "Escape") setSelected(null);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [selected, nextImg, prevImg]);
 
   return (
     <>
@@ -26,12 +53,12 @@ export default function ProjectsPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
-                onClick={() => setSelected(project)}
+                onClick={() => openProject(project)}
                 className="group cursor-pointer border border-border rounded-sm bg-dark-card hover:border-cyan-border transition-colors duration-300 overflow-hidden"
               >
                 <div className="aspect-video bg-navy relative overflow-hidden">
                   <Image
-                    src={project.image}
+                    src={project.images[0]}
                     alt={project.name}
                     fill
                     className="object-cover"
@@ -84,19 +111,60 @@ export default function ProjectsPage() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="aspect-video bg-navy relative">
-                <Image
-                  src={selected.image}
-                  alt={selected.name}
-                  fill
-                  className="object-cover"
-                  sizes="100vw"
-                />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentImg}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={selected.images[currentImg]}
+                      alt={`${selected.name} (${currentImg + 1})`}
+                      fill
+                      className="object-cover"
+                      sizes="100vw"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
                 <button
                   onClick={() => setSelected(null)}
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full border border-border bg-dark/80 flex items-center justify-center text-text-dim hover:text-text hover:border-cyan-border transition-colors"
+                  className="absolute top-4 right-4 z-10 w-8 h-8 rounded-full border border-border bg-dark/80 flex items-center justify-center text-text-dim hover:text-text hover:border-cyan-border transition-colors"
                 >
                   &#x2715;
                 </button>
+
+                {selected.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={prevImg}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full border border-border bg-dark/80 flex items-center justify-center text-text-dim hover:text-text hover:border-cyan-border transition-colors"
+                    >
+                      &#x276E;
+                    </button>
+                    <button
+                      onClick={nextImg}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full border border-border bg-dark/80 flex items-center justify-center text-text-dim hover:text-text hover:border-cyan-border transition-colors"
+                    >
+                      &#x276F;
+                    </button>
+
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                      {selected.images.map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrentImg(i)}
+                          className={`w-2 h-2 rounded-full transition-colors ${
+                            i === currentImg ? "bg-cyan" : "bg-text-dim/40 hover:bg-text-dim/70"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="p-6">

@@ -29,20 +29,20 @@
         "desc": "บริหารจัดการโครงการวิศวกรรม ดูแลระบบไฟฟ้าและเครื่องกล พัฒนาระบบ AI สำหรับตรวจสอบเอกสารและ Audit"
       },
       {
-        "role": "วิศวกรระบบพลังงาน",
+        "role": "นายช่างระบบพลังงาน",
         "company": "ฟรีแลนซ์ / ที่ปรึกษา",
         "type": "Contract",
         "period": "2020–2023",
         "desc": "ตรวจสอบและปรับปรุงระบบพลังงาน ออกแบบระบบ Solar สร้าง Dashboard วิเคราะห์ข้อมูล"
       },
       {
-        "role": "วิศวกรฝ่ายช่าง",
+        "role": "นายช่างฝ่ายช่าง",
         "company": "บริษัทเอกชน",
         "type": "Full-time",
         "period": "2019–2020",
         "desc": "ดูแลระบบไฟฟ้าและเครื่องกลในอาคาร ตรวจสอบคุณภาพงานติดตั้ง จัดทำรายงาน QA/QC"
       },
-      {"role": "วิศวกรฝ่ายทดสอบ",
+      {"role": "นายช่างฝ่ายทดสอบ",
         "company": "บริษัทเอกชน",
         "type": "Full-time",
         "period": "2017–2019",
@@ -120,27 +120,27 @@
       "solution": "พัฒนาระบบ AI ที่อ่านและวิเคราะห์เอกสารอัตโนมัติ แจ้งเตือนเมื่อพบความไม่สอดคล้อง",
       "tools": ["Python", "OCR", "FastAPI", "PostgreSQL"],
       "tags": ["AI", "Automation", "Audit"],
-      "image": "/images/project-audit.jpg",
+      "images": ["/images/project-audit.jpg"],
       "year": "2024"
     },
     {
-      "name": "QA Validation System",
-      "desc": "ระบบตรวจสอบคุณภาพงานติดตั้งระบบไฟฟ้าและเครื่องกล พร้อม Dashboard แสดงผลแบบ Real-time",
-      "problem": "การตรวจสอบคุณภาพงานติดตั้งใช้เอกสารจำนวนมาก ติดตามสถานะยาก",
-      "solution": "สร้างระบบ Digital สำหรับบันทึกและติดตามการตรวจสอบ พร้อม Dashboard วิเคราะห์",
-      "tools": ["React", "Node.js", "PostgreSQL", "Grafana"],
-      "tags": ["QA/QC", "Dashboard", "Web App"],
-      "image": "/images/project-qa.jpg",
+      "name": "QA Inspector ระบบไฟฟ้า (ผู้ตรวจสอบระบบไฟฟ้า)",
+      "desc": "ตรวจสอบระบบไฟฟ้าด้วยกล้องถ่ายภาพความร้อน (Thermoscan)",
+      "problem": "การตรวจสอบคุณภาพอุปกรณ์ไฟฟ้า ภายในโรงงานและอาคาร",
+      "solution": "-",
+      "tools": ["-", "-", "-", "-"],
+      "tags": ["QA/QC", "-", "-"],
+      "images": ["/images/11828 -tile.jpg", "/images/11828 - Co.jpg"],
       "year": "2024"
     },
     {
       "name": "Solar Energy Checker",
-      "desc": "ระบบตรวจสอบและวิเคราะห์ประสิทธิภาพระบบ Solar PV แจ้งเตือนเมื่อผลผลิตต่ำกว่าเป้า",
-      "problem": "ไม่สามารถติดตามประสิทธิภาพระบบ Solar แบบ Real-time ได้",
-      "solution": "พัฒนาระบบ Monitoring ที่ดึงข้อมูลจาก Inverter วิเคราะห์และแจ้งเตือนอัตโนมัติ",
-      "tools": ["Python", "MQTT", "InfluxDB", "Grafana"],
+      "desc": "ติดตั้ง โซลาร์ฟาร์ม (Solar Farm) 6Mw",
+      "problem": "-",
+      "solution": "-",
+      "tools": ["-", "-", "-", "-"],
       "tags": ["Solar", "IoT", "Monitoring"],
-      "image": "/images/project-solar.jpg",
+      "images": ["/images/11862-tile.jpg"],
       "year": "2023"
     },
     {
@@ -150,7 +150,7 @@
       "solution": "รวมข้อมูลจากทุกระบบเข้า Dashboard เดียว พร้อมวิเคราะห์และสร้างรายงานอัตโนมัติ",
       "tools": ["Python", "React", "PostgreSQL", "Power BI"],
       "tags": ["Dashboard", "Energy", "Analytics"],
-      "image": "/images/project-dashboard.jpg",
+      "images": ["/images/project-dashboard.jpg"],
       "year": "2023"
     },
     {
@@ -160,7 +160,7 @@
       "solution": "ติดตั้ง Sensor และพัฒนาระบบ Monitoring ควบคุมอุณหภูมิอัตโนมัติ",
       "tools": ["Python", "MQTT", "Node-RED", "InfluxDB"],
       "tags": ["HVAC", "IoT", "Energy"],
-      "image": "/images/project-hvac.jpg",
+      "images": ["/images/project-hvac.jpg"],
       "year": "2022"
     },
     {
@@ -170,18 +170,18 @@
       "solution": "พัฒนาระบบ Digital NCR บันทึก ติดตาม และแจ้งเตือนอัตโนมัติ",
       "tools": ["Next.js", "Prisma", "MySQL", "Line Notify"],
       "tags": ["QA/QC", "Web App", "Construction"],
-      "image": "/images/project-ncr.jpg",
+      "images": ["/images/project-ncr.jpg"],
       "year": "2022"
     },
     {
-      "name": "รอไส่ข้อมูล",
-      "desc": "ระบบจัดการรายงานความไม่สอดคล้องในงานก่อสร้าง ตั้งแต่บันทึกจนถึงแก้ไขและปิดงาน",
-      "problem": "การจัดการ NCR ใช้เอกสารกระดาษ ติดตามสถานะยาก สูญหายง่าย",
-      "solution": "พัฒนาระบบ Digital NCR บันทึก ติดตาม และแจ้งเตือนอัตโนมัติ",
-      "tools": ["Next.js", "Prisma", "MySQL", "Line Notify"],
-      "tags": ["QA/QC", "Web App", "Construction"],
-      "image": "/images/project-ncr.jpg",
-      "year": "2022"
+      "name": "ออกแบบ-ตรวจสอบ-ปรับปรุงเครื่องผลิตแก๊ซ CH2H",
+      "desc": "ปรับปรุงระบบการทำงานให้ปลอดภัย มีเอกสารตรวจสอบ ตรวจสอบประจำปี",
+      "problem": "การจัดการระบบควบคุม ติดตามสถานะยาก เน้นความปลอดภัย",
+      "solution": "พัฒนาระบบ แจ้งเตือนแรงดันเกิน แรงดันต่ำ บันทึก ติดตาม และแจ้งเตือน",
+      "tools": ["SketchUp", "Autocad", "Excel"],
+      "tags": ["QA/QC", "design", "Construction"],
+      "images": ["/images/project- Acetylene Generator.jpg", "/images/1747827508762.jpg", "/images/1748606978968.jpg"],
+      "year": "2024"
     }
   ],
   "aiTools": [
@@ -192,7 +192,7 @@
       "status": "Production"
     },
     {
-      "name": "QA Validation System",
+      "name": "QA Inspector",
       "desc": "ระบบตรวจสอบคุณภาพงานติดตั้ง ตรวจสอบ Checklist อัตโนมัติ แจ้งเตือนเมื่อพบข้อบกพร่อง",
       "tech": ["Python", "Computer Vision", "React"],
       "status": "Production"
@@ -234,6 +234,32 @@
       "desc": "การออกแบบระบบอัตโนมัติสำหรับงานตรวจสอบและ Audit เพื่อลดเวลาและเพิ่มความถูกต้อง",
       "category": "Automation",
       "date": "2023"
+    }
+  ],
+  "software": [
+    {
+      "title": "CAD & Design",
+      "icon": "ruler",
+      "items": ["AutoCAD", "SketchUp", "Revit MEP"],
+      "samples": ["/images/sample-cad-1.jpg", "/images/sample-cad-2.jpg", "/images/sample-cad-3.jpg", "/images/sample-cad-4.jpg"]
+    },
+    {
+      "title": "Programming & AI",
+      "icon": "code",
+      "items": ["Python", "FastAPI", "Flask", "React", "Next.js", "Node.js"],
+      "samples": ["/images/sample-code-1.jpg", "/images/sample-code-2.jpg", "/images/sample-code-3.jpg", "/images/sample-code-4.jpg"]
+    },
+    {
+      "title": "Data & Visualization",
+      "icon": "chart",
+      "items": ["Power BI", "Grafana", "PostgreSQL", "MySQL", "InfluxDB"],
+      "samples": ["/images/sample-data-1.jpg", "/images/sample-data-2.jpg", "/images/sample-data-3.jpg", "/images/sample-data-4.jpg"]
+    },
+    {
+      "title": "Engineering Tools",
+      "icon": "wrench",
+      "items": ["ETAP", "DIALux", "HAP (Carrier)", "Excel (VBA)"],
+      "samples": ["/images/sample-eng-1.jpg", "/images/sample-eng-2.jpg", "/images/sample-eng-3.jpg", "/images/sample-eng-4.jpg"]
     }
   ],
   "contact": {

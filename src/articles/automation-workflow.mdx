@@ -1,0 +1,99 @@
+export const metadata = {
+  title: "Automation Workflow สำหรับงานตรวจสอบ",
+  desc: "การออกแบบระบบอัตโนมัติสำหรับงานตรวจสอบและ Audit เพื่อลดเวลาและเพิ่มความถูกต้อง",
+  category: "Automation",
+  date: "2023",
+};
+
+import { ArticleImage, ImageGrid } from "@/components/ui/ArticleImage";
+
+{/* ด้านบนคือส่วนข้อมูลบทความ + import component ภาพ */}
+
+# Automation Workflow สำหรับงานตรวจสอบ
+
+## ทำไมต้อง Automation?
+
+งานตรวจสอบและ Audit ในงานวิศวกรรมมักมีขั้นตอนซ้ำๆ และใช้เวลาเยอะ การออกแบบระบบอัตโนมัติช่วยลดเวลาและเพิ่มความถูกต้องได้อย่างมาก
+
+{/* ภาพเดี่ยว */}
+<Image
+  src="/images/article-automation-flow.jpg"
+  alt="Automation Workflow"
+  caption="ตัวอย่าง Automation Workflow สำหรับงานตรวจสอบ"
+/>
+
+## หลักการออกแบบ Workflow
+
+### 1. วิเคราะห์ขั้นตอนปัจจุบัน
+
+ก่อนออกแบบระบบอัตโนมัติ ต้องเข้าใจขั้นตอนปัจจุบันก่อน:
+
+- ขั้นตอนไหนทำซ้ำๆ?
+- ขั้นตอนไหนใช้เวลามาก?
+- ขั้นตอนไหนมีโอกาสผิดพลาดสูง?
+
+### 2. ออกแบบ Flow
+
+```
+ข้อมูลเข้า → ตรวจสอบ → ตัดสินใจ → แจ้งเตือน → บันทึก
+     ↓           ↓          ↓          ↓          ↓
+   รับข้อมูล   ตรวจสอบ    ผ่าน/ไม่ผ่าน  แจ้งเตือน   บันทึกผล
+```
+
+### 3. เลือกเครื่องมือ
+
+| ขั้นตอน | เครื่องมือ |
+|---------|-----------|
+| รับข้อมูล | API, Web Form, File Upload |
+| ตรวจสอบ | Python, AI/ML |
+| แจ้งเตือน | Line Notify, Email |
+| บันทึก | PostgreSQL, Google Sheets |
+| Dashboard | Power BI, Grafana |
+
+{/* 2 ภาพคู่: ซ้าย = Line Notify, ขวา = Dashboard */}
+<ImageGrid>
+  <Image
+    src="/images/article-automation-notify.jpg"
+    alt="Line Notify"
+    caption="การแจ้งเตือนผ่าน Line Notify อัตโนมัติ"
+  />
+  <Image
+    src="/images/article-automation-dashboard.jpg"
+    alt="Automation Dashboard"
+    caption="Dashboard ติดตามสถานะงานตรวจสอบ"
+  />
+</ImageGrid>
+
+## ตัวอย่าง Workflow จริง
+
+### ระบบตรวจสอบเอกสาร
+
+1. **รับเอกสาร** — Upload PDF ผ่าน Web Form
+2. **OCR อ่านข้อความ** — Python + Tesseract
+3. **ตรวจสอบความถูกต้อง** — AI Validation
+4. **แจ้งเตือน** — ส่งผลผ่าน Line Notify
+5. **บันทึกผล** — เก็บใน PostgreSQL
+6. **Dashboard** — แสดงผลบน Power BI
+
+### ระบบ NCR (Non-Conformance Report)
+
+1. **บันทึก NCR** — ผ่าน Web App
+2. **แจ้งเตือนผู้รับผิดชอบ** — Line Notify
+3. **ติดตามสถานะ** — Dashboard
+4. **รายงานอัตโนมัติ** — สรุปรายสัปดาห์
+
+## เครื่องมือที่แนะนำ
+
+- **Python** — ภาษาหลักสำหรับ automation
+- **FastAPI** — สร้าง API อย่างรวดเร็ว
+- **Next.js** — สร้าง Web App
+- **PostgreSQL** — ฐานข้อมูล
+- **Line Notify** — แจ้งเตือนผ่าน Line
+- **Power BI / Grafana** — Dashboard
+
+## ผลลัพธ์
+
+- ลดเวลาทำงาน **60-80%**
+- ลดความผิดพลาดจากมนุษย์
+- ติดตามสถานะแบบ Real-time
+- สร้างรายงานอัตโนมัติ
