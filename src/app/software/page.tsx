@@ -6,6 +6,7 @@ import Image from "next/image";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Badge } from "@/components/ui/Badge";
 import { GridBackground } from "@/components/effects/GridBackground";
+import { FlexImage } from "@/components/ui/FlexImage";
 import { data } from "@/data/portfolio";
 
 const categoryIcons: Record<string, string> = {
@@ -70,7 +71,7 @@ export default function SoftwarePage() {
                           onClick={() => setLightbox({ src, alt: `${category.title} sample ${j + 1}` })}
                           className="relative aspect-video bg-navy rounded-sm overflow-hidden border border-border hover:border-cyan-border transition-colors cursor-pointer group"
                         >
-                          <Image
+                          <FlexImage
                             src={src}
                             alt={`${category.title} sample ${j + 1}`}
                             fill

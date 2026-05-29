@@ -164,13 +164,13 @@
       "year": "2022"
     },
     {
-      "name": "Non-Conformance Report System",
-      "desc": "ระบบจัดการรายงานความไม่สอดคล้องในงานก่อสร้าง ตั้งแต่บันทึกจนถึงแก้ไขและปิดงาน",
-      "problem": "การจัดการ NCR ใช้เอกสารกระดาษ ติดตามสถานะยาก สูญหายง่าย",
-      "solution": "พัฒนาระบบ Digital NCR บันทึก ติดตาม และแจ้งเตือนอัตโนมัติ",
-      "tools": ["Next.js", "Prisma", "MySQL", "Line Notify"],
-      "tags": ["QA/QC", "Web App", "Construction"],
-      "images": ["/images/project-ncr.jpg"],
+      "name": "RPA (Robotic Process Automation",
+      "desc": "ระบสร้าง Bot มาพิมพ์ข้อมูลลงช่องต่างๆ บนหน้าจอแทนคน",
+      "problem": "ใช้ สคริปต์ Python ใช้ไลบรารี pandas หรือ openpyxl เพื่ออ่านข้อมูลจาก Excel ทีละบรรทัด",
+      "solution": "-",
+      "tools": ["-", "Bot", "MySQL", "Python"],
+      "tags": ["QA/QC", "Web App", "-"],
+      "images": ["/images/bot1.jpg","/images/bot2.jpg","/images/bot3" ],
       "year": "2022"
     },
     {
@@ -240,19 +240,19 @@
     {
       "title": "CAD & Design",
       "icon": "ruler",
-      "items": ["AutoCAD", "SketchUp", "Revit MEP"],
-      "samples": ["/images/sample-cad-1.jpg", "/images/sample-cad-2.jpg", "/images/sample-cad-3.jpg", "/images/sample-cad-4.jpg"]
+      "items": ["AutoCAD", "SketchUp", "-"],
+      "samples": ["/images/+Equipment.jpg", "/images/DWG-BertramChemical.jpg", "/images/DWG-BertramChemical1.jpg", "/images/room.png"]
     },
     {
       "title": "Programming & AI",
       "icon": "code",
-      "items": ["Python", "FastAPI", "Flask", "React", "Next.js", "Node.js"],
-      "samples": ["/images/sample-code-1.jpg", "/images/sample-code-2.jpg", "/images/sample-code-3.jpg", "/images/sample-code-4.jpg"]
+      "items": ["Python", "FastAPI", "Flask", "VsCode", "Next.js", "Node.js"],
+      "samples": ["/images/bot4.jpg", "/images/bot5.jpg", "/images/bot6.jpg", "/images/bot8.jpg"]
     },
     {
       "title": "Data & Visualization",
       "icon": "chart",
-      "items": ["Power BI", "Grafana", "PostgreSQL", "MySQL", "InfluxDB"],
+      "items": ["Excel (VBA)", "Grafana", "PostgreSQL", "MySQL", "-"],
       "samples": ["/images/sample-data-1.jpg", "/images/sample-data-2.jpg", "/images/sample-data-3.jpg", "/images/sample-data-4.jpg"]
     },
     {
