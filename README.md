@@ -980,14 +980,20 @@ html.light {
 ### สิ่งที่ต้องตั้งค่า
 
 1. สมัคร [supabase.com](https://supabase.com) → สร้าง Project
-2. รัน SQL สร้าง table:
+2. ไปที่ **SQL Editor** แล้วรันทั้งหมดนี้:
 ```sql
+-- สร้างตาราง
 CREATE TABLE page_visits (
   id BIGSERIAL PRIMARY KEY,
   page TEXT NOT NULL,
   visited_at TIMESTAMPTZ DEFAULT NOW()
 );
 CREATE INDEX idx_page_visits_visited_at ON page_visits(visited_at);
+
+-- ตั้ง RLS policy (สำคัญ! ถ้าไม่ทำ insert ไม่ได้)
+ALTER TABLE page_visits ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "allow_insert" ON page_visits FOR INSERT WITH CHECK (true);
+CREATE POLICY "allow_select" ON page_visits FOR SELECT USING (true);
 ```
 3. สร้าง `.env.local`:
 ```
