@@ -19,6 +19,10 @@
 11. [วิธี Deploy ขึ้น GitHub Pages (แบบละเอียด)](#11-วิธี-deploy-ขึ้น-github-pages-แบบละเอียด)
 12. [วิธี Deploy ขึ้น Vercel](#12-วิธีdeploy-ขึ้น-vercel)
 13. [แก้ปัญหาที่พบบ่อย](#13-แก้ปัญหาที่พบบ่อย)
+14. [SEO & Google Search Console](#14-seo--google-search-console)
+15. [ระบบสี (Color System)](#15-ระบบสี-color-system)
+16. [สถิติผู้เข้าชม (Supabase)](#16-สถิติผู้เข้าชม-supabase)
+17. [Easter Egg (Pixel Art)](#17-easter-egg-pixel-art)
 
 ---
 
