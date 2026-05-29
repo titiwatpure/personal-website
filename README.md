@@ -635,6 +635,8 @@ jobs:
   deploy:
     needs: build              # depends on build job
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages      # จำเป็นต้องมีสำหรับ GitHub Pages
     steps:
       - uses: actions/deploy-pages@v4
 ```
