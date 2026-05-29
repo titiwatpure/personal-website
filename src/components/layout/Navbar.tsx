@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation"; // ดึง URL ปัจจุ�
 import { motion, AnimatePresence } from "framer-motion"; // ใช้ทำ animation
 import { cn } from "@/lib/utils"; // ฟังก์ชันรวม class CSS
 import { ThemeToggle } from "@/components/ThemeToggle"; // ปุ่มสลับธีม
+import { useEasterEgg, PixelEasterEgg } from "@/components/effects/PixelEasterEgg";
 
 // รายการเมนูทั้งหมด
 const navLinks = [
@@ -26,6 +27,7 @@ export function Navbar() {
   const pathname = usePathname(); // URL ปัจจุบัน เช่น "/about"
   const [scrolled, setScrolled] = useState(false); // เลื่อนหน้าจอลงมาหรือยัง
   const [mobileOpen, setMobileOpen] = useState(false); // เมนูมือถือเปิดอยู่ไหม
+  const { isActive, trigger, deactivate } = useEasterEgg();
 
   // ตรวจจับการเลื่อนหน้าจอ → เปลี่ยนสีพื้นหลัง Navbar
   useEffect(() => {
@@ -52,9 +54,11 @@ export function Navbar() {
       <Link
         href="/"
         className="font-[family-name:var(--font-space-mono)] text-sm text-cyan tracking-wider"
+        onClick={trigger}
       >
         TRITOT.ENGINEER
       </Link>
+      {isActive && <PixelEasterEgg onComplete={deactivate} />}
 
       {/* เมนู Desktop (ซ่อนบนมือถือ) */}
       <div className="hidden md:flex items-center gap-6">
