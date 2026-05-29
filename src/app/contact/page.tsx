@@ -64,7 +64,8 @@ export default function ContactPage() {
               <motion.div
                 key={method.label}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.08 }}
               >
                 {method.href ? (

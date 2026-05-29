@@ -1,23 +1,78 @@
 @import "tailwindcss";
 
+/* Theme variables (custom names to avoid circular reference with @theme) */
+:root {
+  --t-navy: #0a0e1a;
+  --t-navy-light: #0f1322;
+  --t-dark: #050508;
+  --t-dark-card: #0d0d14;
+  --t-cyan: #00d4ff;
+  --t-cyan-dim: rgba(0, 212, 255, 0.15);
+  --t-cyan-border: rgba(0, 212, 255, 0.25);
+  --t-gold: #c8a97e;
+  --t-gold-dim: rgba(200, 169, 126, 0.15);
+  --t-gold-border: rgba(200, 169, 126, 0.25);
+  --t-text: #e8e4d9;
+  --t-text-dim: rgba(232, 228, 217, 0.85);
+  --t-text-muted: rgba(232, 228, 217, 0.7);
+  --t-border: rgba(255, 255, 255, 0.1);
+  --t-border-hover: rgba(0, 212, 255, 0.3);
+}
+
+html.light {
+  --t-navy: #f8f9fa;
+  --t-navy-light: #ffffff;
+  --t-dark: #ffffff;
+  --t-dark-card: #f1f3f5;
+  --t-cyan: #0077b6;
+  --t-cyan-dim: rgba(0, 119, 182, 0.1);
+  --t-cyan-border: rgba(0, 119, 182, 0.2);
+  --t-gold: #b8860b;
+  --t-gold-dim: rgba(184, 134, 11, 0.1);
+  --t-gold-border: rgba(184, 134, 11, 0.2);
+  --t-text: #1a1a2e;
+  --t-text-dim: rgba(26, 26, 46, 0.75);
+  --t-text-muted: rgba(26, 26, 46, 0.55);
+  --t-border: rgba(0, 0, 0, 0.12);
+  --t-border-hover: rgba(0, 119, 182, 0.3);
+}
+
 @theme inline {
-  --color-navy: #0a0e1a;
-  --color-navy-light: #0f1322;
-  --color-dark: #050508;
-  --color-dark-card: #0d0d14;
-  --color-cyan: #00d4ff;
-  --color-cyan-dim: rgba(0, 212, 255, 0.15);
-  --color-cyan-border: rgba(0, 212, 255, 0.25);
-  --color-gold: #c8a97e;
-  --color-gold-dim: rgba(200, 169, 126, 0.15);
-  --color-gold-border: rgba(200, 169, 126, 0.25);
-  --color-text: #e8e4d9;
-  --color-text-dim: rgba(232, 228, 217, 0.5);
-  --color-text-muted: rgba(232, 228, 217, 0.25);
-  --color-border: rgba(255, 255, 255, 0.07);
-  --color-border-hover: rgba(0, 212, 255, 0.3);
+  --color-navy: var(--t-navy);
+  --color-navy-light: var(--t-navy-light);
+  --color-dark: var(--t-dark);
+  --color-dark-card: var(--t-dark-card);
+  --color-cyan: var(--t-cyan);
+  --color-cyan-dim: var(--t-cyan-dim);
+  --color-cyan-border: var(--t-cyan-border);
+  --color-gold: var(--t-gold);
+  --color-gold-dim: var(--t-gold-dim);
+  --color-gold-border: var(--t-gold-border);
+  --color-text: var(--t-text);
+  --color-text-dim: var(--t-text-dim);
+  --color-text-muted: var(--t-text-muted);
+  --color-border: var(--t-border);
+  --color-border-hover: var(--t-border-hover);
   --font-sans: "Sarabun", sans-serif;
   --font-mono: "Space Mono", monospace;
+}
+
+html.light .glass {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+html.light .grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 119, 182, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 119, 182, 0.05) 1px, transparent 1px);
+}
+
+html.light .glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 119, 182, 0.1), 0 0 60px rgba(0, 119, 182, 0.03);
+}
+
+html.light .glow-gold {
+  box-shadow: 0 0 20px rgba(184, 134, 11, 0.1), 0 0 60px rgba(184, 134, 11, 0.03);
 }
 
 html {
@@ -25,8 +80,8 @@ html {
 }
 
 body {
-  background: var(--color-dark);
-  color: var(--color-text);
+  background: var(--t-dark);
+  color: var(--t-text);
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
@@ -36,17 +91,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-dark);
+  background: var(--t-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-cyan-border);
+  background: var(--t-cyan-border);
   border-radius: 2px;
 }
 
 ::selection {
-  background: var(--color-cyan-dim);
-  color: var(--color-cyan);
+  background: var(--t-cyan-dim);
+  color: var(--t-cyan);
 }
 
 /* Grid background pattern */
@@ -64,6 +119,11 @@ body {
 
 .glow-gold {
   box-shadow: 0 0 20px rgba(200, 169, 126, 0.15), 0 0 60px rgba(200, 169, 126, 0.05);
+}
+
+/* Card hover glow */
+.card-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), 0 0 60px rgba(0, 212, 255, 0.05);
 }
 
 /* Glass effect */

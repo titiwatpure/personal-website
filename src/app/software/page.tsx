@@ -31,7 +31,8 @@ export default function SoftwarePage() {
               <motion.div
                 key={category.title}
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.1 }}
                 className="border border-border rounded-sm bg-dark-card overflow-hidden hover:border-cyan-border transition-colors"
               >

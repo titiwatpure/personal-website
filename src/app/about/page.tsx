@@ -37,8 +37,9 @@ export default function AboutPage() {
               <motion.div
                 key={i}
                 initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 + i * 0.1 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.1 }}
                 className="flex items-start gap-3 p-4 border border-border rounded-sm bg-dark-card"
               >
                 <span className="text-cyan mt-1">&#x25B8;</span> {/* ไอคอนสามเหลี่ยม */}

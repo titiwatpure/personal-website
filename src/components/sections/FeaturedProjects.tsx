@@ -26,7 +26,8 @@ export function FeaturedProjects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group border border-border rounded-sm bg-dark-card hover:border-cyan-border transition-colors duration-300 overflow-hidden"
+              whileHover={{ y: -4 }}
+              className="group border border-border rounded-sm bg-dark-card hover:border-cyan-border card-glow transition-all duration-300 overflow-hidden"
             >
               {/* พื้นที่รูปภาพ */}
               <div className="aspect-video bg-navy relative overflow-hidden">
@@ -34,7 +35,7 @@ export function FeaturedProjects() {
                   src={project.images[0]}
                   alt={project.name}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-card to-transparent" />

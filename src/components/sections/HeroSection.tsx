@@ -52,7 +52,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-text-dim text-base leading-relaxed max-w-xl mb-8"
+              className="text-text text-base leading-relaxed max-w-xl mb-8"
             >
               {data.personal.bio}
             </motion.p>
@@ -64,18 +64,22 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="flex gap-3 flex-wrap"
             >
-              <Link
-                href="/projects"
-                className="inline-flex items-center px-6 py-2.5 bg-cyan text-dark text-sm font-medium rounded-sm hover:opacity-90 transition-opacity"
-              >
-                ดูผลงาน
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center px-6 py-2.5 border border-border text-text-dim text-sm rounded-sm hover:border-cyan-border hover:text-text transition-colors"
-              >
-                ติดต่อฉัน
-              </Link>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center px-6 py-2.5 bg-cyan text-dark text-sm font-medium rounded-sm hover:opacity-90 transition-opacity"
+                >
+                  ดูผลงาน
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center px-6 py-2.5 border border-border text-text-dim text-sm rounded-sm hover:border-cyan-border hover:text-text transition-colors"
+                >
+                  ติดต่อฉัน
+                </Link>
+              </motion.div>
             </motion.div>
           </div>
 

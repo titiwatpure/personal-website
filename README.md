@@ -785,6 +785,16 @@ npm run build
 2. ตรวจสอบว่า path ใน MDX ถูกต้อง: `src="/images/ชื่อไฟล์.jpg"`
 3. ตรวจสอบว่าไม่มีช่องว่างในชื่อไฟล์
 
+### Footer / เนื้อหาถูกบังโดย GridBackground
+
+ถ้าเนื้อหาส่วนท้ายของหน้าถูกบังหรือมัวๆ ให้เพิ่ม `relative z-10` ให้ element นั้น:
+
+```tsx
+<footer className="relative z-10 ...">  {/* เพิ่ม relative z-10 */}
+```
+
+**สาเหตุ:** `GridBackground` ใช้ `fixed inset-0 z-0` พร้อม gradient ทับทั้งหน้าจอ
+
 ---
 
 ## 14. SEO & Google Search Console
@@ -901,3 +911,89 @@ site:titiwatpure.github.io/personal-website
 - **TypeScript** — Type-safe JavaScript
 - **MDX** — Markdown + JSX สำหรับบทความ
 - **Sarabun + Space Mono** — Fonts
+- **Supabase** — Visitor Counter Database
+- **Custom Theme System** — Light/Dark Theme Toggle (localStorage + CSS variables)
+
+---
+
+## 15. ระบบสี (Color System)
+
+### โครงสร้าง
+
+ระบบสีทำงาน 3 ชั้น:
+
+1. **CSS Variables** (`:root` / `html.light`) ใน `globals.css` — กำหนดค่าสีดิบ
+2. **`@theme inline`** — map ตัวแปร CSS ไปเป็น Tailwind tokens
+3. **Tailwind classes** — ใช้ใน component เช่น `text-text`, `bg-dark`
+
+### ค่าสีที่ใช้
+
+| Class | Dark Theme | Light Theme | ใช้กับ |
+|-------|-----------|-------------|--------|
+| `text-text` | #e8e4d9 (off-white) | #1a1a2e (dark navy) | ข้อความหลัก |
+| `text-text-dim` | 85% opacity | 85% opacity | ข้อความรอง |
+| `text-text-muted` | 70% opacity | 70% opacity | label เล็กๆ |
+| `text-cyan` | #00d4ff | #0077b6 | ไฮไลท์/ลิงก์ |
+| `text-gold` | #c8a97e | #b8860b | ข้อความพิเศษ |
+| `bg-dark` | #050508 | #ffffff | พื้นหลัง |
+| `bg-dark-card` | #0d0d14 | #f1f3f5 | การ์ด |
+
+### วิธีเปลี่ยนสี
+
+เปิด `src/app/globals.css` แก้ค่าใน `:root` (dark) หรือ `html.light` (light):
+
+```css
+:root {
+  --t-text: #e8e4d9;        /* สีข้อความหลัก dark theme */
+  --t-cyan: #00d4ff;        /* สีไฮไลท์ dark theme */
+}
+html.light {
+  --t-text: #1a1a2e;        /* สีข้อความหลัก light theme */
+  --t-cyan: #0077b6;        /* สีไฮไลท์ light theme */
+}
+```
+
+### ระบบธีม (Custom Theme System)
+
+ใช้ระบบธีมแบบ custom แทน next-themes เพื่อความเข้ากันได้กับ Next.js 16:
+
+| ไฟล์ | หน้าที่ |
+|------|---------|
+| `src/components/ThemeProvider.tsx` | React context สำหรับจัดการธีม (dark/light) |
+| `src/components/ThemeToggle.tsx` | ปุ่มสลับธีม (ไอคอนพระอาทิตย์/พระจันทร์) |
+| `src/app/layout.tsx` | Inline script ใน `<head>` ตั้ง class ก่อน render (ป้องกัน flash) |
+
+**หลักการ:**
+- ใช้ `localStorage` เก็บธีมที่เลือก
+- Inline script ใน `<head>` อ่าน localStorage แล้วเพิ่ม class `light` บน `<html>` ก่อน React hydrate
+- `ThemeProvider` sync state หลัง mount
+- CSS `html.light` override ตัวแปรสีทั้งหมด
+
+---
+
+## 16. สถิติผู้เข้าชม (Supabase)
+
+### สิ่งที่ต้องตั้งค่า
+
+1. สมัคร [supabase.com](https://supabase.com) → สร้าง Project
+2. รัน SQL สร้าง table:
+```sql
+CREATE TABLE page_visits (
+  id BIGSERIAL PRIMARY KEY,
+  page TEXT NOT NULL,
+  visited_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX idx_page_visits_visited_at ON page_visits(visited_at);
+```
+3. สร้าง `.env.local`:
+```
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_ANON_KEY
+```
+
+### วิธีใช้ GitHub Pages + Supabase
+
+เพิ่ม Secrets ใน GitHub repo:
+1. ไป **Settings → Secrets → Actions**
+2. เพิ่ม `NEXT_PUBLIC_SUPABASE_URL` และ `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+3. แก้ `.github/workflows/deploy.yml` เพิ่ม environment variables ใน build step

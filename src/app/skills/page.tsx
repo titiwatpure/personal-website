@@ -38,7 +38,8 @@ export default function SkillsPage() {
               <motion.div
                 key={key}
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: i * 0.1 }}
                 className="border border-border rounded-sm bg-dark-card p-6 hover:border-cyan-border transition-colors group"
               >
@@ -71,8 +72,9 @@ export default function SkillsPage() {
             {/* Software & Tools card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: categories.length * 0.1 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: 0.2 }}
               className="border border-border rounded-sm bg-dark-card p-6 hover:border-cyan-border transition-colors group"
             >
               <div className="flex items-center gap-3 mb-5">
@@ -84,12 +86,12 @@ export default function SkillsPage() {
 
               <div className="flex flex-wrap gap-2 mb-4">
                 {data.software.flatMap((cat) =>
-                  cat.items.map((item) => (
-                    <Badge key={item} variant="default" className="group-hover:border-opacity-50">
-                      {item}
+                  cat.items.map((item) => `${cat.title}-${item}`)
+                ).map((key, i) => (
+                    <Badge key={key} variant="default" className="group-hover:border-opacity-50">
+                      {key.split("-").slice(1).join("-")}
                     </Badge>
-                  ))
-                )}
+                ))}
               </div>
 
               <Link

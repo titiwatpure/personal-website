@@ -14,15 +14,15 @@ const components: MDXComponents = {
     <h3 className="text-lg font-medium text-text mb-3 mt-6">{children}</h3>
   ),
   p: ({ children }) => (
-    <p className="text-sm text-text-dim leading-relaxed mb-4">{children}</p>
+    <p className="text-sm text-text leading-relaxed mb-4">{children}</p>
   ),
   ul: ({ children }) => (
-    <ul className="list-disc list-inside text-sm text-text-dim leading-relaxed mb-4 space-y-1">
+    <ul className="list-disc list-inside text-sm text-text leading-relaxed mb-4 space-y-1">
       {children}
     </ul>
   ),
   ol: ({ children }) => (
-    <ol className="list-decimal list-inside text-sm text-text-dim leading-relaxed mb-4 space-y-1">
+    <ol className="list-decimal list-inside text-sm text-text leading-relaxed mb-4 space-y-1">
       {children}
     </ol>
   ),
@@ -37,13 +37,13 @@ const components: MDXComponents = {
   ),
   pre: ({ children }) => (
     <pre className="bg-navy border border-border rounded-sm p-4 mb-4 overflow-x-auto">
-      <code className="font-[family-name:var(--font-space-mono)] text-xs text-text-dim">
+      <code className="font-[family-name:var(--font-space-mono)] text-xs text-text">
         {children}
       </code>
     </pre>
   ),
   blockquote: ({ children }) => (
-    <blockquote className="border-l-2 border-cyan/30 pl-4 text-sm text-text-dim italic mb-4">
+    <blockquote className="border-l-2 border-cyan/30 pl-4 text-sm text-text italic mb-4">
       {children}
     </blockquote>
   ),

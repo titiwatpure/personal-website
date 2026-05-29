@@ -6,6 +6,8 @@ import { Sarabun, Space_Mono } from "next/font/google"; // โหลดฟอน
 import "./globals.css"; // โหลดไฟล์ CSS หลัก (ธีมสี, เอฟเฟกต์)
 import { Navbar } from "@/components/layout/Navbar"; // เมนูนำทางด้านบน
 import { Footer } from "@/components/layout/Footer"; // ส่วนท้ายเว็บ
+import { ThemeProvider } from "@/components/ThemeProvider"; // ระบบสลับธีม Light/Dark
+import { TrackVisit } from "@/components/TrackVisit"; // บันทึกสถิติผู้เข้าชม
 
 // ตั้งค่าฟอนต์ Sarabun (ใช้เป็นฟอนต์หลักสำหรับข้อความภาษาไทย)
 const sarabun = Sarabun({
@@ -95,11 +97,22 @@ export default function RootLayout({
     <html
       lang="th"
       className={`${sarabun.variable} ${spaceMono.variable} antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='light')document.documentElement.classList.add('light');else document.documentElement.classList.remove('light')}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col">
-        <Navbar /> {/* เมนูนำทางด้านบน */}
-        <main className="flex-1">{children}</main> {/* เนื้อหาแต่ละหน้า */}
-        <Footer /> {/* ส่วนท้ายเว็บ */}
+        <ThemeProvider>
+          <TrackVisit /> {/* บันทึกสถิติผู้เข้าชม */}
+          <Navbar /> {/* เมนูนำทางด้านบน */}
+          <main className="flex-1">{children}</main> {/* เนื้อหาแต่ละหน้า */}
+          <Footer /> {/* ส่วนท้ายเว็บ */}
+        </ThemeProvider>
       </body>
     </html>
   );

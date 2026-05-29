@@ -8,6 +8,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation"; // ดึง URL ปัจจุบัน
 import { motion, AnimatePresence } from "framer-motion"; // ใช้ทำ animation
 import { cn } from "@/lib/utils"; // ฟังก์ชันรวม class CSS
+import { ThemeToggle } from "@/components/ThemeToggle"; // ปุ่มสลับธีม
 
 // รายการเมนูทั้งหมด
 const navLinks = [
@@ -56,23 +57,27 @@ export function Navbar() {
       </Link>
 
       {/* เมนู Desktop (ซ่อนบนมือถือ) */}
-      <ul className="hidden md:flex items-center gap-6">
-        {navLinks.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className={cn(
-                "text-xs tracking-wider transition-colors duration-200 font-[family-name:var(--font-space-mono)]",
-                pathname === link.href
-                  ? "text-cyan"           // หน้าปัจจุบัน: สีฟ้า
-                  : "text-text-dim hover:text-text" // หน้าอื่น: สีจาง, เ hover เข้มขึ้น
-              )}
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="hidden md:flex items-center gap-6">
+        <ul className="flex items-center gap-6">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={cn(
+                  "relative text-xs tracking-wider transition-colors duration-200 font-[family-name:var(--font-space-mono)]",
+                  "after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-[1px] after:bg-cyan after:transition-transform after:duration-300 after:origin-left",
+                  pathname === link.href
+                    ? "text-cyan after:scale-x-100"           // หน้าปัจจุบัน: สีฟ้า + เส้นเต็ม
+                    : "text-text-dim hover:text-text after:scale-x-0 hover:after:scale-x-100" // หน้าอื่น: เส้นซ่อน, hover แสดง
+                )}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <ThemeToggle />
+      </div>
 
       {/* ปุ่ม Hamburger (แสดงบนมือถือเท่านั้น) */}
       <button
@@ -121,6 +126,9 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              <div className="px-4 py-3">
+                <ThemeToggle />
+              </div>
             </div>
           </motion.div>
         )}

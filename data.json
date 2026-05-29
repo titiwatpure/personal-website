@@ -127,18 +127,18 @@
       "name": "QA Inspector ระบบไฟฟ้า (ผู้ตรวจสอบระบบไฟฟ้า)",
       "desc": "ตรวจสอบระบบไฟฟ้าด้วยกล้องถ่ายภาพความร้อน (Thermoscan)",
       "problem": "การตรวจสอบคุณภาพอุปกรณ์ไฟฟ้า ภายในโรงงานและอาคาร",
-      "solution": "-",
-      "tools": ["-", "-", "-", "-"],
-      "tags": ["QA/QC", "-", "-"],
+      "solution": "ใช้กล้อง Thermoscan ตรวจสอบอุปกรณ์ไฟฟ้า วิเคราะห์จุดความร้อน จัดทำรายงาน",
+      "tools": ["Thermoscan", "Report", "Excel", "Analysis"],
+      "tags": ["QA/QC", "Electrical", "Thermoscan"],
       "images": ["/images/11828 -tile.jpg", "/images/11828 - Co.jpg"],
       "year": "2024"
     },
     {
       "name": "Solar Energy Checker",
       "desc": "ติดตั้ง โซลาร์ฟาร์ม (Solar Farm) 6Mw",
-      "problem": "-",
-      "solution": "-",
-      "tools": ["-", "-", "-", "-"],
+      "problem": "ต้องการตรวจสอบและติดตามการทำงานของ Solar Farm ขนาดใหญ่",
+      "solution": "พัฒนาระบบ Monitoring ตรวจสอบ Solar Farm 6MW แบบ Real-time",
+      "tools": ["IoT", "Monitoring", "Dashboard", "Solar"],
       "tags": ["Solar", "IoT", "Monitoring"],
       "images": ["/images/11862-tile.jpg"],
       "year": "2023"
@@ -167,10 +167,10 @@
       "name": "RPA (Robotic Process Automation",
       "desc": "ระบสร้าง Bot มาพิมพ์ข้อมูลลงช่องต่างๆ บนหน้าจอแทนคน",
       "problem": "ใช้ สคริปต์ Python ใช้ไลบรารี pandas หรือ openpyxl เพื่ออ่านข้อมูลจาก Excel ทีละบรรทัด",
-      "solution": "-",
-      "tools": ["-", "Bot", "MySQL", "Python"],
-      "tags": ["QA/QC", "Web App", "-"],
-      "images": ["/images/bot1.jpg","/images/bot2.jpg","/images/bot3" ],
+      "solution": "พัฒนา Bot ด้วย Python อ่านข้อมูลจาก Excel แล้วพิมพ์ลงหน้าจออัตโนมัติ",
+      "tools": ["Python", "Bot", "MySQL", "Excel"],
+      "tags": ["QA/QC", "Web App", "Automation"],
+      "images": ["/images/bot1.jpg","/images/bot2.jpg","/images/bot3"],
       "year": "2022"
     },
     {
@@ -240,7 +240,7 @@
     {
       "title": "CAD & Design",
       "icon": "ruler",
-      "items": ["AutoCAD", "SketchUp", "-"],
+      "items": ["AutoCAD", "SketchUp", "Revit"],
       "samples": ["/images/+Equipment.jpg", "/images/DWG-BertramChemical.jpg", "/images/DWG-BertramChemical1.jpg", "/images/room.png"]
     },
     {
@@ -252,7 +252,7 @@
     {
       "title": "Data & Visualization",
       "icon": "chart",
-      "items": ["Excel (VBA)", "Grafana", "PostgreSQL", "MySQL", "-"],
+      "items": ["Excel (VBA)", "Grafana", "PostgreSQL", "MySQL", "Power BI"],
       "samples": ["/images/sample-data-1.jpg", "/images/sample-data-2.jpg", "/images/sample-data-3.jpg", "/images/sample-data-4.jpg"]
     },
     {

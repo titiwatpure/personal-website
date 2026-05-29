@@ -14,7 +14,7 @@ export function Badge({ children, variant = "default", className }: BadgeProps) 
   return (
     <span
       className={cn(
-        "inline-block text-[10px] px-2.5 py-1 font-[family-name:var(--font-space-mono)] tracking-wider rounded-sm",
+        "inline-block text-[10px] px-2.5 py-1 font-[family-name:var(--font-space-mono)] tracking-wider rounded-sm hover:scale-105 transition-transform duration-200",
         variant === "cyan" && "bg-cyan-dim text-cyan border border-cyan-border",   // สีฟ้า
         variant === "gold" && "bg-gold-dim text-gold border border-gold-border",   // สีทอง
         variant === "default" && "bg-white/5 text-text-dim border border-border",  // สีเทา

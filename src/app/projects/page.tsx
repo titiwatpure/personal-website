@@ -53,15 +53,16 @@ export default function ProjectsPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
+                whileHover={{ y: -4 }}
                 onClick={() => openProject(project)}
-                className="group cursor-pointer border border-border rounded-sm bg-dark-card hover:border-cyan-border transition-colors duration-300 overflow-hidden"
+                className="group cursor-pointer border border-border rounded-sm bg-dark-card hover:border-cyan-border card-glow transition-all duration-300 overflow-hidden"
               >
                 <div className="aspect-video bg-navy relative overflow-hidden">
                   <Image
                     src={project.images[0]}
                     alt={project.name}
                     fill
-                    className="object-cover"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-dark-card to-transparent" />
