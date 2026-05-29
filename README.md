@@ -16,7 +16,7 @@
 8. [วิธีเพิ่มบทความ (MDX)](#8-วิธีเพิ่มบทความ-mdx)
 9. [วิธีแก้ไขข้อความหน้าเว็บ](#9-วิธีแก้ไขข้อความหน้าเว็บ)
 10. [วิธี Build / Export](#10-วิธี-build--export)
-11. [วิธี Deploy ขึ้น GitHub Pages](#11-วิธีdeploy-ขึ้น-github-pages)
+11. [วิธี Deploy ขึ้น GitHub Pages (แบบละเอียด)](#11-วิธี-deploy-ขึ้น-github-pages-แบบละเอียด)
 12. [วิธี Deploy ขึ้น Vercel](#12-วิธีdeploy-ขึ้น-vercel)
 13. [แก้ปัญหาที่พบบ่อย](#13-แก้ปัญหาที่พบบ่อย)
 
@@ -554,13 +554,13 @@ npx serve out
 
 ---
 
-## 11. วิธีDeploy ขึ้น GitHub Pages
+## 11. วิธี Deploy ขึ้น GitHub Pages (แบบละเอียด)
 
 ### ขั้นตอนที่ 1: สร้าง GitHub Repository
 
 1. ไปที่ https://github.com/new
-2. ตั้งชื่อ repo: `theone.github.io` (ต้องตรงกับชื่อ GitHub username + .github.io)
-3. เลือก **Public**
+2. ตั้งชื่อ repo เช่น `personal-website`
+3. **อย่าติ๊ก** Add README / .gitignore (เพราะเรามีอยู่แล้ว)
 4. กด **Create repository**
 
 ### ขั้นตอนที่ 2: Push โค้ดขึ้น GitHub
@@ -568,71 +568,139 @@ npx serve out
 เปิด Terminal ในโฟลเดอร์โปรเจกต์:
 
 ```bash
-git init
+# เพิ่ม remote (ทำครั้งเดียว)
+git remote add origin https://github.com/ชื่อคุณ/ชื่อrepo.git
+
+# เพิ่มไฟล์ทั้งหมดที่จะ commit
 git add .
-git commit -m "First commit"
-git branch -M main
-git remote add origin https://github.com/your-username/theone.github.io.git
+
+# ดูก่อนว่ามีไฟล์อะไรที่ไม่ควร commit ไหม (เช่น .env, secrets)
+git status
+
+# commit
+git commit -m "first commit"
+
+# push ขึ้น main
 git push -u origin main
 ```
 
-### ขั้นตอนที่ 3: ตั้งค่า GitHub Pages
+> **สิ่งที่ต้องระวัง:**
+> - **อย่า commit ไฟล์ที่มี secret** เช่น `.env`, API token, password
+> - ถ้าเผลอ commit ไปแล้ว ต้อง revoke token นั้นทันทีแล้วลบออกจาก history
 
-1. ไปที่ repo บน GitHub
-2. กด **Settings** > **Pages**
-3. ที่ **Source** เลือก **Deploy from a branch**
-4. เลือก branch `main` และ folder `/ (root)`
-5. กด **Save**
-
-### ขั้นตอนที่ 4: สร้าง GitHub Actions (Build อัตโนมัติ)
+### ขั้นตอนที่ 3: สร้าง GitHub Actions Workflow
 
 สร้างไฟล์ `.github/workflows/deploy.yml`:
 
 ```yaml
+# ชื่อ workflow (จะแสดงใน tab Actions บน GitHub)
 name: Deploy to GitHub Pages
 
+# trigger: ทำงานเมื่อ push ไป main
 on:
   push:
     branches: [main]
 
+# permission ที่จำเป็นสำหรับ GitHub Pages
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: read    # อ่านโค้ด
+  pages: write      # เขียนหน้าเว็บ
+  id-token: write   # ยืนยันตัวตน
 
 jobs:
+  # Job 1: Build
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest     # ใช้ Ubuntu ในการ build
     steps:
+      # ดึงโค้ดจาก repo
       - uses: actions/checkout@v4
+
+      # ติดตั้ง Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      # ติดตั้ง dependencies
       - run: npm ci
+
+      # build โปรเจค
       - run: npm run build
+
+      # อัปโหลด output ไปให้ job ถัดไป
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: out
+          path: out           # Next.js output dir (ตั้ง output: "export" ใน next.config)
 
+  # Job 2: Deploy (ต้องรอ build เสร็จก่อน)
   deploy:
-    needs: build
+    needs: build              # depends on build job
     runs-on: ubuntu-latest
     steps:
       - uses: actions/deploy-pages@v4
 ```
 
-5. กลับไป **Settings** > **Pages**
-6. เปลี่ยน **Source** เป็น **GitHub Actions**
-7. Push โค้ดขึ้น GitHub อีกครั้ง:
+### ขั้นตอนที่ 4: ตั้งค่า GitHub Pages
+
+1. ไปที่ repo บน GitHub → **Settings** → **Pages**
+2. Source เลือก **GitHub Actions** (ไม่ใช่ Deploy from a branch)
+3. 保存
+
+### ขั้นตอนที่ 5: Push Workflow ขึ้น GitHub
 
 ```bash
-git add .
-git commit -m "Add deploy workflow"
+git add .github/workflows/deploy.yml
+git commit -m "ci: add GitHub Actions deploy workflow"
 git push
 ```
 
-8. ไปที่ tab **Actions** เพื่อดูสถานะ build
-9. เมื่อเสร็จ เว็บจะอยู่ที่ `https://your-username.github.io`
+### ขั้นตอนที่ 6: ตรวจสอบผลลัพธ์
+
+1. ไปที่ tab **Actions** บน repo เพื่อดูสถานะ build
+2. คลิก workflow run ล่าสุดเพื่อดู log แต่ละ step
+3. เมื่อเสร็จ เว็บจะอยู่ที่ `https://ชื่อคุณ.github.io/ชื่อrepo/`
+
+### Workflow ทำงานยังไง
+
+```
+คุณ push main → GitHub ตรวจจับ → เริ่ม workflow
+                                    ├── checkout โค้ด
+                                    ├── setup Node.js 20
+                                    ├── npm ci (ติดตั้ง dependencies)
+                                    ├── npm run build (build Next.js)
+                                    ├── upload artifact
+                                    └── deploy ขึ้น GitHub Pages
+```
+
+ทุก push ไป `main` จะ trigger อัตโนมัติ ไม่ต้องทำอะไรเพิ่ม
+
+### ถ้า Build ไม่สำเร็จ
+
+1. ไปที่ tab **Actions** → คลิก workflow ที่ fail → ดู step ที่ error
+2. แก้ไขโค้ดตาม error message
+3. Commit + Push ใหม่ → workflow จะรันอีกครั้งอัตโนมัติ
+
+### สรุป Command ทั้งหมด
+
+```bash
+# 1. Remote (ทำครั้งเดียว)
+git remote add origin https://github.com/USER/REPO.git
+
+# 2. Commit & Push โค้ด
+git add .
+git commit -m "first commit"
+git push -u origin main
+
+# 3. สร้างไฟล์ .github/workflows/deploy.yml (ตามด้านบน)
+
+# 4. Push workflow ขึ้นไป
+git add .github/workflows/deploy.yml
+git commit -m "ci: add GitHub Actions deploy workflow"
+git push
+
+# 5. ไปตั้งค่า GitHub Pages → Settings → Pages → Source: GitHub Actions
+```
+
+หลังจากนั้นทุก `git push` จะ build + deploy อัตโนมัติ
 
 ---
 
