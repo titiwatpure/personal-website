@@ -6,6 +6,7 @@ export async function trackVisit(page: string) {
   if (sessionStorage.getItem(key)) return;
 
   try {
+    if (!supabase) return;
     await supabase.from("page_visits").insert({ page });
     sessionStorage.setItem(key, "1");
   } catch {

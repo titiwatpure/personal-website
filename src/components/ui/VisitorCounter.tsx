@@ -15,6 +15,7 @@ export function VisitorCounter() {
 
   useEffect(() => {
     async function fetchStats() {
+      if (!supabase) return;
       const now = new Date();
       const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
       const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
