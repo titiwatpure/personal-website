@@ -997,3 +997,34 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_ANON_KEY
 1. ไป **Settings → Secrets → Actions**
 2. เพิ่ม `NEXT_PUBLIC_SUPABASE_URL` และ `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 3. แก้ `.github/workflows/deploy.yml` เพิ่ม environment variables ใน build step
+
+---
+
+## 17. Easter Egg (Pixel Art)
+
+### วิธีใช้
+
+กด logo **"TRITOT.ENGINEER"** ใน Navbar **3 ครั้ง** ภายใน 1 วินาที → ตัวละครวิศวกร pixel art จะเดินข้ามหน้าจอจากซ้ายไปขวา
+
+### รายละเอียด
+
+| หัวข้อ | ข้อมูล |
+|--------|--------|
+| Trigger | กด logo 3 ครั้ง (triple-click) |
+| ตัวละคร | วิศวกร 16x16 pixel (CSS box-shadow) |
+| Animation | เดิน 8 วินาที, สลับขาทุก 300ms, bounce |
+| หายไป | อัตโนมัติเมื่อเดินถึงขอบขวา |
+
+### ไฟล์ที่เกี่ยวข้อง
+
+| ไฟล์ | หน้าที่ |
+|------|---------|
+| `src/components/effects/PixelEasterEgg.tsx` | ตัวละคร pixel art + animation + trigger logic |
+| `src/components/layout/Navbar.tsx` | เพิ่ม click handler บน logo |
+
+### วิธีปรับแต่ง
+
+- **เปลี่ยนความเร็ว:** แก้ `duration: 8` ใน `motion.div` (PixelEasterEgg.tsx)
+- **เปลี่ยนสี:** แก้ hex code ใน `FRAME_0_SHADOWS` / `FRAME_1_SHADOWS`
+- **เปลี่ยนจำนวนคลิก:** แก้ `>= 3` ใน `useEasterEgg` hook
+- **เปลี่ยนขนาด:** แก้ `scale` ใน `PixelCharacter` component
