@@ -252,7 +252,7 @@
       "title": "Data & Visualization",
       "icon": "chart",
       "items": ["Excel (VBA)", "Grafana", "PostgreSQL", "MySQL", "Power BI"],
-      "samples": ["/images/data1-tile.jpg", "/images/data2-tile.jpg", "/images/data3-tile.jpg", "/images/data4-tile.jpg"]
+      "samples": ["/images/data1.jpg", "/images/data2.jpg", "/images/data3.jpg", "/images/data4.jpg"]
     },
     {
       "title": "Engineering Tools",
