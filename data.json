@@ -42,7 +42,7 @@
         "period": "2019–2020",
         "desc": "ดูแลระบบไฟฟ้าและเครื่องกลในอาคาร ตรวจสอบคุณภาพงานติดตั้ง จัดทำรายงาน QA/QC"
       },
-      {"role": "นายช่างฝ่ายทดสอบ",
+      {"role": "นายช่างไฟฟ้า",
         "company": "บริษัทเอกชน",
         "type": "Full-time",
         "period": "2017–2019",
@@ -104,7 +104,6 @@
       "icon": "chart",
       "items": [
         "Python (FastAPI, Flask)",
-        "Power BI / Grafana",
         "PostgreSQL / MySQL",
         "Data Visualization",
         "ETL Pipeline",
@@ -253,7 +252,7 @@
       "title": "Data & Visualization",
       "icon": "chart",
       "items": ["Excel (VBA)", "Grafana", "PostgreSQL", "MySQL", "Power BI"],
-      "samples": ["/images/sample-data-1.jpg", "/images/sample-data-2.jpg", "/images/sample-data-3.jpg", "/images/sample-data-4.jpg"]
+      "samples": ["/images/data1-tile.jpg", "/images/data2-tile.jpg", "/images/data3-tile.jpg", "/images/data4-tile.jpg"]
     },
     {
       "title": "Engineering Tools",
